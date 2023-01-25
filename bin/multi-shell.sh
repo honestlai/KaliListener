@@ -10,7 +10,7 @@ WHEN=$(date +"Captured-%h%d-%I%M%p")
 
 # Create Screen Session
 screen -d -m -S $WHEN socat UNIX-LISTEN:${SOCKF},umask=0077 STDIO
-/opt/bin/discord.sh
+/opt/bin/discord.sh $WHEN
 
 # Wait for socket
 while test ! -e ${SOCKF} ; do sleep 1 ; done
