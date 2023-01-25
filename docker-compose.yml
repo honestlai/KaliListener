@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  KaliListener:
+    image:   honestlai/kalilistener:latest
+    container_name: KaliListener
+    hostname: KaliListener
+    user: root
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    environment:
+      - USER=root
+      - VNCEXPOSE=1
+      - VNCPORT=5900
+      - VNCPWD=password
+      - VNCDISPLAY=1920x1080
+      - NOVNCPORT 9090
+      - TZ=Pacific/Honolulu
+      - MESHDOMAIN=remote.example.com
+      - MESHKEY=
+      # If meshkey has a dollar sign, an escape charcter is required
+
+    ports:
+    - 465:465      # For reverse shell listener
+    - 4444:4444    # For Metasploit
+    - 4445:4445    # Additional listening port if needed
+    - 9090:9090    # No-VNC Port (usually routed through Nginx)
+    - 5900:5900    # VNC Port
+    volumes:
+      - /opt/kali/opt:/opt
+      - /opt/kali/root:/root
+
+    restart: unless-stopped
+    networks:
+      Network-Bridge:
+
+networks:
+  Network-Bridge:
+    driver: bridge
+    name: Network-Bridge
+    ipam:
+     config:
+       - subnet: 172.0.0.0/24

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+clear
+printf "Tools installed in this Container:\n"
+printf "\e[33mSoCat Listener\e[37m (running on 465), \e[33mMetasploit\e[37m (runs on 4444), \e[33mWPScan\e[37m, \e[33mNMap\e[37m\n"
+printf "\e[33mImpacket\e[37m, & \e[33mOpenVPN\e[37m"
+printf "\e[37m\n"
+printf "====================================================================================\n"
+printf "\e[36m"
+figlet -w 240 "KALI Listener"
+printf "${STOP}"
+printf "\e[37m\n"
+printf "If sessions are available, type \e[33mconnect\e[37m or \e[33mc\e[37m + the session \e[33m#\e[37m or \e[33mname\e[37m to connect\n"
+printf "Type \e[33mshow\e[37m or \e[33mbanner\e[37m to show socat/screen connections again\n"
+screen -ls | grep -v 'Dead\|Receiver\|wipe\|Sockets\|Socket\|mesh\|gotor'
+printf "====================================================================================\n"
+printf "Run \e[33mmsf86\e[37m or \e[33mmsf64\e[37m to run a metasploit listener on 4444\n"
+printf "\n\n"

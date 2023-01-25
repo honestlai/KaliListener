@@ -1,0 +1,26 @@
+#!/bin/bash
+
+banner
+
+if [ -z "$1" ]
+  then
+	printf "\nSession Name/Number not entered.\n"
+	read -p 'Enter the Reverse Shell Session Number: ' sessionnumber
+  else
+	sessionnumber=$1
+fi
+
+sessiontitle=$(screen -ls | grep $sessionnumber)
+screen -r $sessionnumber
+
+clear
+banner
+
+if [[ $sessiontitle  =~ "Captured" ]];
+  then
+	printf "Rename Session? Press ENTER to cancel\n"
+	read -p 'New Name: ' newname
+	screen -r $sessionnumber -X sessionname $newname
+  else
+	banner
+fi

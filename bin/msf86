@@ -1,0 +1,23 @@
+#!/bin/bash
+
+clear
+printf "\n"
+printf "\e[37m\n"
+printf "==================================================================\n"
+printf "\e[33m"
+figlet -w 120 -f standard  "Metasploit x86"
+printf "\e[37m\n"
+printf "To suspend a screen session press \e[33mCtrl+A then Ctrl+D\e[37m\n"
+printf "==================================================================\n"
+printf "\n"
+
+printf "A new screen session with the title \e[33mmsf86\e[37m will be created\n"
+while true; do
+    read -p "Do you wish to have metasploit auto listed on start: " yn
+    case $yn in
+        [Yy]* ) screen -d -m -R msf86 /usr/share/metasploit-framework/msfconsole -r /config/bin/msf86.l.rc; break;;
+        [Nn]* ) screen -d -m -R msf86 /usr/share/metasploit-framework/msfconsole -r /config/bin/msf86.rc;break;;
+        * ) printf "\n"; echo "Please answer yes or no.";;
+    esac
+done
+banner

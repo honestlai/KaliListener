@@ -1,0 +1,21 @@
+#!/bin/bash
+
+#Read Input
+
+read -p "Enter Servername: " servername
+read -p "Server IP: " serverip
+
+nmap -sV -sC -vv -oN -A 1-10000 /config/nmaps/$servername.txt $serverip
+clear
+
+printf "\n"
+printf "\e[37m\n"
+printf "=================================\n"
+printf "\e[33m"
+figlet -w 120 -f standard  "$servername"
+printf "${STOP}"
+printf "\e[37m\n"
+printf "=================================\n"
+printf "\n\n"
+printf "Nmap Results:\n"
+cat /config/nmaps/$servername.txt | more
