@@ -49,11 +49,11 @@ chmod 777 /root/.vnc/xstartup
 
 
 # MeshAgent installer
-MESHFILES=/opt/bin/meshagent.msh
-if [[ $MESHDOMAIN  =~ "remoteportal.example.com" ]];
+if [[ $MESHDOMAIN  =~ "remoteportal.example.com" ]] || [[ -z "$MESHDOMAIN" ]];
   then
   printf "MeshAgent not configured, agent installation skipped\n"
   else
+  MESHFILES=/opt/bin/meshagent.msh
   if test -f "$MESHFILES";
 	then
 	  printf "MeshAgent.msh site file present in /opt/bin, new  agent installation skipped\n\n\n" && screen -d -m -S mesh /opt/bin/meshagent
@@ -70,11 +70,19 @@ alias date='date +"%a, %h %d, %Y  %r"'
 screen -d -m -S Receiver socat TCP4-LISTEN:465,reuseaddr,fork EXEC:/opt/bin/multi-shell.sh
 
 #Discord webhook alert if configured
-if [[ $DISCORDWH =~ "randomcharacterstring" ]];
+if [[ $DISCORDWH =~ "randomcharacterstring" ]] || [[ -z "$DISCORDWH" ]];
   then
-    printf "Discord Webhook not configured\n"
+    printf "Discord Webhook not configured\n\n"
   else
-    sed -i '1s/^/export WEBHOOK_URL="$DISCORDWH\n/' /opt/bin/discord.sh
+    DISFILE=/opt/bin/.discord
+    if test -f "$DISFILE";
+      then
+      printf "Discord Webhook already installed\n\n"
+      else
+      echo "export WEBHOOK_URL=$DISCORDWH" | cat - /opt/bin/discord.sh > /opt/bin/.discord
+      cp /opt/bin/.discord /opt/bin/discord.sh && chmod +x /opt/bin/discord.sh
+      printf "Discord Webhook installed\n\n"
+    fi
 fi
 
 # Shell & Path modifications
