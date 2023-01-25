@@ -1,4 +1,3 @@
-export WEBHOOK_URL=https://discord.com/api/webhooks/1067734584470544404/IkPAi4i2m4BpKxaoIXUD4gDxMfUMHHHZRPQv8mZcnwJ_mblEn7b1Lb2C5JD5v6M9LCnu
 curl \
     -H "Content-Type: application/json" \
     -X POST -d "{
