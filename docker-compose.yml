@@ -21,7 +21,7 @@ services:
       - MESHDOMAIN=remote.example.com
       - MESHKEY=
       # If meshkey or Discord webhook has a dollar sign, an escape charcter (extra $ sign) is required
-      - DISCORDWH=https://discord.com/api/webhooks/1067734584470544404/IkPAi4i2m4BpKxaoIXUD4gDxMfUMHHHZRPQv8mZcnwJ_mblEn7b1Lb2C5JD5v6M9LCnu
+      - DISCORDWH=
 
     ports:
     - 465:465      # For reverse shell listener
